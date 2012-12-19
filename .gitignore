@@ -1,6 +1,3 @@
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
+/controlato-ejb/target/
+/controlato-web/target/
+/controlato-ear/target/
