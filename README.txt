@@ -1,7 +1,7 @@
 Controlato
 ==========
 
-Controlato is a web-based service conceived and designed to assist families on the control of their daily lives.
+Controlato is a web-based service conceived and designed to assist families on the control of their daily lives. This software is licensed under GNU Affero General Public License. Please, read the license, available on the file LICENSE.txt, before you use it or change it.
 
 Contact
 -------
