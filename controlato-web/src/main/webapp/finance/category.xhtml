@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- /* Controlato is a web-based service conceived and designed to assist families
+ * on the control of their daily lives.
+ * Copyright (C) 2012 Controlato.org
+ *
+ * Controlato is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Controlato is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Controlato. Look for the file LICENSE.txt at the root level.
+ * If you do not, see http://www.gnu.org/licenses/.
+ * */-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <body>
+        <ui:composition template="../layout.xhtml">
+            <ui:define name="title">#{bundle.category}</ui:define>
+            <ui:define name="content">
+                <div class="content">
+                    <h1>#{bundle.category}: #{categoryOperationMBean.categoryOperation.name}</h1>
+                    <h:form>
+                        <p:tabView>
+                            <p:tab id="properties" title="#{bundle.category}">
+                                <h:panelGrid columns="2" cellpadding="3" columnClasses="panelGridColumnAlignRight">
+                                    <h:outputText value="#{bundle.parentCategory}:" styleClass="fieldLabel"/>
+                                    <h:link outcome="category" value="#{categoryOperationMBean.categoryOperation.parentCategory}">
+                                        <f:param name="id" value="#{categoryOperationMBean.categoryOperation.parentCategory.id}"/>
+                                    </h:link>
+
+                                    <h:outputText value="#{bundle.name}:" styleClass="fieldLabel"/>
+                                    <h:outputText value="#{categoryOperationMBean.categoryOperation.name}"/>
+
+                                    <h:outputText value="#{bundle.type}:" styleClass="fieldLabel"/>
+                                    <h:outputText value="#{categoryOperationMBean.categoryOperation.transactionType}"/>
+
+                                    <h:outputText value="#{bundle.allocatedBudget}:" styleClass="fieldLabel"/>
+                                    <h:outputText value="#{categoryOperationMBean.categoryOperation.allocatedBudget}">
+                                        <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+                                    </h:outputText>
+
+                                    <h:outputText value="#{bundle.budgetLimit}:" styleClass="fieldLabel"/>
+                                    <h:outputText value="#{categoryOperationMBean.categoryOperation.budgetLimit}">
+                                        <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+                                    </h:outputText>
+
+                                    <h:outputText value="#{bundle.subCategories}:" styleClass="fieldLabel"/>
+                                    <h:panelGrid columns="1">
+                                        <c:forEach items="#{categoryOperationMBean.categoryOperation.subCategories}" var="subCategory">
+                                            <h:link outcome="category" value="#{subCategory.name}">
+                                                <f:param name="id" value="#{subCategory.id}"/>
+                                            </h:link>
+                                        </c:forEach>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+
+                                <h:button value="#{bundle.edit}" outcome="category_edit">
+                                    <f:param name="id" value="#{categoryOperationMBean.categoryOperation.id}"/>
+                                </h:button>
+                            </p:tab>
+                            <p:tab id="history" title="#{bundle.history}">
+                                <h:inputHidden id="idCategory" value="#{categoryHistoryReport.categoryOperation.id}"/>
+                                <h:outputText value="#{bundle.textInteractiveCategoryChart}"/>
+                                <p:barChart value="#{categoryHistoryReport.categoryHistoryMontlyModel}" legendPosition="ne" xaxisLabel="#{range.rangeName}">
+                                    <p:ajax event="itemSelect"
+                                            listener="#{categoryHistoryReport.itemSelected}"
+                                            update="detailedExpenses titleDetailedExpenses"
+                                            process="@this idCategory"/>
+                                </p:barChart>
+                                <h2><h:outputText id="titleDetailedExpenses" value="#{bundle.expenditures} #{categoryHistoryReport.selectedMonth} #{categoryHistoryReport.selectedYear}"/></h2>
+                                <p:dataTable id="detailedExpenses" value="#{categoryHistoryReport.expenses}" var="expense" emptyMessage="#{bundle.noRecordsFound}">
+                                    <p:column>
+                                        <f:facet name="header"><h:outputText value="#{bundle.description}"/></f:facet>
+                                        <h:link outcome="expenditure" value="#{expense.description}">
+                                            <f:param name="id" value="#{expense.id}"/>
+                                        </h:link>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header"><h:outputText value="#{bundle.receiver}"/></f:facet>
+                                        <h:link outcome="place" value="#{expense.receiver}">
+                                            <f:param name="id" value="#{expense.receiver.id}"/>
+                                        </h:link>
+                                    </p:column>
+                                    <p:column style="text-align: right;">
+                                        <f:facet name="header"><h:outputText value="#{bundle.amount}"/></f:facet>
+                                        <h:outputText value="#{expense.amount}">
+                                            <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+                                        </h:outputText>
+                                        <f:facet name="footer">
+                                            <h:outputText value="#{categoryHistoryReport.totalExpenses}">
+                                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+                                            </h:outputText>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header"><h:outputText value="#{bundle.account}"/></f:facet>
+                                        <h:link outcome="account" value="#{expense.account}">
+                                            <f:param name="id" value="#{expense.account.id}"/>
+                                        </h:link>
+                                    </p:column>
+                                    <p:column style="text-align: center;">
+                                        <f:facet name="header"><h:outputText value="#{bundle.paymentDate}"/></f:facet>
+                                        <h:outputText value="#{expense.debitDate}">
+                                            <f:convertDateTime pattern="#{bundle.dateFormat}"/>
+                                        </h:outputText>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:tab>
+                        </p:tabView>
+                        <h:panelGrid>
+                            <h:button value="#{bundle.back}" outcome="categories"/>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

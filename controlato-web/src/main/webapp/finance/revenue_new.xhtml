@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- /* Controlato is a web-based service conceived and designed to assist families
+ * on the control of their daily lives.
+ * Copyright (C) 2012 Controlato.org
+ *
+ * Controlato is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Controlato is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Controlato. Look for the file LICENSE.txt at the root level.
+ * If you do not, see http://www.gnu.org/licenses/.
+ * */-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="../layout.xhtml">
+            <ui:define name="title">#{bundle.revenue}</ui:define>
+            <ui:define name="content">
+                <div class="content">
+                    <h1>#{bundle.revenue}</h1>
+                    <h:form>
+                        <h:messages styleClass="alertMessage"/>
+                        <h:panelGrid columns="2" cellpadding="3" columnClasses="panelGridColumnAlignRight">
+                            <h:outputLabel for="description" value="#{bundle.description}:" styleClass="mandatoryFieldLabel"/>
+                            <p:inputText id="description" label="#{bundle.description}" required="true" size="30" maxlength="255" value="#{revenueMBean.revenue.description}"/>
+
+                            <h:outputLabel for="category" value="#{bundle.category}:" styleClass="mandatoryFieldLabel"/>
+                            <p:selectOneMenu id="category" label="#{bundle.category}" value="#{revenueMBean.selectedCategory}" required="true">
+                                <f:selectItem itemLabel="#{bundle.select}" itemValue=""/>
+                                <f:selectItems value="#{revenueMBean.categories}" var="category" itemLabel="#{category.name}" itemValue="#{category.id}" />
+                            </p:selectOneMenu>
+
+                            <h:outputLabel for="amount" value="#{bundle.amount}:" styleClass="mandatoryFieldLabel"/>
+                            <h:panelGrid columns="2">
+                                <p:inputText id="amount" label="#{bundle.amount}" required="true" maxlength="10" size="10" value="#{revenueMBean.revenue.amount}" readonly="#{! empty revenueMBean.revenue.id}">
+                                    <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+                                </p:inputText>
+                                <h:outputText value="#{bundle.currencyFormat}" styleClass="fieldFormat"/>
+                            </h:panelGrid>
+
+                            <h:outputLabel for="creditDate" value="#{bundle.receiptDate}:" styleClass="mandatoryFieldLabel"/>
+                            <h:panelGrid columns="2">
+                                <p:calendar pattern="#{bundle.dateFormat}" value="#{revenueMBean.revenue.creditDate}" id="creditDate" maxlength="10" size="10" required="true"/>
+                                <h:outputText value="#{bundle.dateFormat}" styleClass="fieldFormat"/>
+                            </h:panelGrid>
+
+                            <h:outputLabel for="account" value="#{bundle.creditToAccount}:" styleClass="mandatoryFieldLabel"/>
+                            <p:selectOneMenu id="account" label="#{bundle.creditToAccount}" required="true" value="#{revenueMBean.selectedAccount}">
+                                <f:selectItem itemLabel="#{bundle.select}" itemValue=""/>
+                                <f:selectItems value="#{revenueMBean.accounts}" var="account" itemLabel="#{account.name}" itemValue="#{account.id}"/>
+                            </p:selectOneMenu>
+
+                            <h:outputLabel for="payer" value="#{bundle.payer}:" styleClass="mandatoryFieldLabel"/>
+                            <p:selectOneMenu id="payer" label="#{bundle.payer}" required="true" value="#{revenueMBean.selectedPayer}">
+                                <f:selectItem itemLabel="#{bundle.select}" itemValue=""/>
+                                <f:selectItems value="#{revenueMBean.payers}" var="payer" itemLabel="#{payer.fullName}" itemValue="#{payer.id}"/>
+                            </p:selectOneMenu>
+
+                            <h:outputLabel for="checked" value="#{bundle.checked}:" styleClass="fieldLabel"/>
+                            <h:panelGroup>
+                                <h:selectBooleanCheckbox id="checked" label="#{bundle.checked}" value="#{revenueMBean.revenue.checked}"/>
+                                <h:outputText value="#{bundle.checkedRevenue}"/>
+                            </h:panelGroup>
+                        </h:panelGrid>
+
+                        <h:inputHidden id="id" value="#{revenueMBean.revenue.id}"/>
+
+                        <h:panelGrid columns="3">
+                            <h:commandButton value="#{bundle.save}" action="#{revenueMBean.save}"/>
+                            <h:button value="#{bundle.cancel}" outcome="revenues"/>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

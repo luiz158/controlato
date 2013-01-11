@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- /* Controlato is a web-based service conceived and designed to assist families
+ * on the control of their daily lives.
+ * Copyright (C) 2012 Controlato.org
+ *
+ * Controlato is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Controlato is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Controlato. Look for the file LICENSE.txt at the root level.
+ * If you do not, see http://www.gnu.org/licenses/.
+ * */-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="../layout.xhtml">
+            <ui:define name="title">#{bundle.users}</ui:define>
+            <ui:define name="content">
+                <div class="content">
+                    <h1>#{bundle.messageTemplates}</h1>
+                    <h:form>
+                        <p:dataTable value="#{messageTemplateMBean.messageTemplates}" var="messageTemplate" emptyMessage="#{bundle.noRecordsFound}">
+                            <p:column>
+                                <f:facet name="header"><h:outputText value="#{bundle.title}"/></f:facet>
+                                <h:link outcome="message_template" value="#{messageTemplate.title}">
+                                    <f:param name="id" value="#{messageTemplate.id}"/>
+                                    <f:param name="lang" value="#{messageTemplate.language.acronym}"/>
+                                </h:link>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header"><h:outputText value="#{bundle.language}"/></f:facet>
+                                <h:outputText value="#{messageTemplate.language}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

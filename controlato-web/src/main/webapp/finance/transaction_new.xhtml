@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- /* Controlato is a web-based service conceived and designed to assist families
+ * on the control of their daily lives.
+ * Copyright (C) 2012 Controlato.org
+ *
+ * Controlato is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Controlato is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Controlato. Look for the file LICENSE.txt at the root level.
+ * If you do not, see http://www.gnu.org/licenses/.
+ * */-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="../layout.xhtml">
+            <ui:define name="title">#{bundle.transaction}</ui:define>
+            <ui:define name="content">
+                <div class="content">
+                    <h1>#{bundle.transaction}</h1>
+                    <h:form>
+                        <h:messages styleClass="alertMessage"/>
+                        <h:panelGrid columns="2" columnClasses="panelGridColumnAlignRight">
+                            <h:outputLabel for="account" value="#{bundle.account}:" styleClass="mandatoryFieldLabel"/>
+                            <h:selectOneMenu id="account" label="#{bundle.account}" value="#{transactionMBean.selectedAccount}">
+                                <f:selectItem itemLabel="#{bundle.select}" itemValue=""/>
+                                <f:selectItems value="#{transactionMBean.accounts}" var="account" itemLabel="#{account.name}" itemValue="#{account.id}"/>
+                            </h:selectOneMenu>
+
+                            <h:outputLabel for="description" value="#{bundle.description}:" styleClass="mandatoryFieldLabel"/>
+                            <h:inputText id="description" label="#{bundle.description}" required="true" size="30" maxlength="255" value="#{transactionMBean.transaction.description}"/>
+
+                            <h:outputLabel for="amount" value="#{bundle.amount}:" styleClass="mandatoryFieldLabel"/>
+                            <h:panelGrid columns="2">
+                                <h:inputText id="amount" label="#{bundle.amount}" required="true" maxlength="10" size="10" value="#{transactionMBean.transaction.amount}">
+                                    <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+                                </h:inputText>
+                                <h:outputText value="#{bundle.currencyFormat}" styleClass="fieldFormat"/>
+                            </h:panelGrid>
+
+                            <h:outputLabel for="type" value="#{bundle.type}:" styleClass="mandatoryFieldLabel"/>
+                            <h:selectOneRadio id="accountType" value="#{transactionMBean.transaction.transactionType}">
+                                <f:selectItem itemLabel="#{bundle.debit}" itemValue="DEBIT"/>
+                                <f:selectItem itemLabel="#{bundle.credit}" itemValue="CREDIT"/>
+                            </h:selectOneRadio>
+
+                            <h:outputLabel for="dateRegistered" value="#{bundle.date}:" styleClass="mandatoryFieldLabel"/>
+                            <h:panelGrid columns="2">
+                                <p:calendar pattern="#{bundle.dateFormat}" value="#{transactionMBean.transaction.dateRegistered}" id="dateRegistered" maxlength="10" size="10"/>
+                                <h:outputText value="#{bundle.dateFormat}" styleClass="fieldFormat"/>
+                            </h:panelGrid>
+
+                            <h:inputHidden id="id" value="#{transactionMBean.transaction.id}"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="3">
+                            <h:commandButton value="#{bundle.save}" action="#{transactionMBean.save}"/>
+                            <h:button value="#{bundle.cancel}" outcome="transactions"/>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

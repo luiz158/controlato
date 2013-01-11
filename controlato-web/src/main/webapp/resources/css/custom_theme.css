@@ -1,0 +1,263 @@
+/*
+ *  Document   : custom_theme
+ *  Created on : Dec 8, 2012, 8:28:47 AM
+ *  Author     : htmfilho
+ *  Description:
+ *      Purpose of the stylesheet follows.
+ * Controlato is a web-based service conceived and designed to assist families
+ * on the control of their daily lives.
+ * Copyright (C) 2012 Controlato.org
+ *
+ * Controlato is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Controlato is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Controlato. Look for the file LICENSE.txt at the root level.
+ * If you do not, see http://www.gnu.org/licenses/.
+ * */
+
+.alertMessage {
+    color: red;
+}
+
+body {
+    background-color: #feeebd;
+    font-size: 12px;
+    font-family: sans-serif;
+    color: #000000;
+    margin: 0px 0px 0px 0px;
+}
+
+#bottom {
+    position: relative;
+    width: 100%;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: #d45500;
+}
+
+.content {
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+#content_area {
+    position: relative;
+    margin-top: 10px;
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    padding: 5px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.mandatoryFieldLabel {
+    font-weight: bold;
+    color: #c80000;
+}
+
+.fieldLabel {
+    font-weight: bold;
+}
+
+.fieldNote {
+    font-style: italic;
+    font-size: smaller;
+}
+
+.footer {
+    font-size: 10px;
+    text-align: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.header3 {
+    font-family: sans-serif;
+    border-bottom: 1px solid #AFAFAF;
+    font-size:  14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding: 0px;
+    color: #1b4258;
+}
+
+.highlight {
+    color: #0000ff;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-size:  18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 0px;
+    color: #833400;
+    margin-top: 0px;
+}
+
+h2 {
+    font-family: sans-serif;
+    border-bottom: 1px solid #AFAFAF;
+    font-size:  14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 0px;
+    color: #1b4258;
+    padding-bottom: 5px;
+}
+
+.identification {
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: blue;
+    font-family: sans-serif;
+}
+
+#identification {
+    text-align: right;
+}
+
+.infoMessage {
+    color: blue;
+}
+
+#left {
+    float: left;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.left_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin-left: 170px;
+}
+
+.menu {
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}
+
+.outputValue {
+    font-style: italic;
+}
+
+.panelGrid {
+    width: 100%;
+}
+
+.panelGridColumn {
+    vertical-align: top;
+}
+
+.panelGridColumnMain {
+    vertical-align: top;
+    width: max-content;
+}
+
+.panelGridColumnRight {
+    vertical-align: top;
+    width: 310px;
+}
+
+.panelGridColumnAlignRight {
+    text-align: right;
+    vertical-align: top;
+    padding-top: 6px;
+}
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.right_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+.subSection {
+    font-family: sans-serif;
+    font-size:  14px;
+    font-weight: bold;
+    padding: 0px;
+    color: #036fab;
+}
+
+.textBlue {
+    color: blue;
+}
+
+.textGray {
+    color: gray;
+}
+
+.textGreen {
+    color: green;
+}
+
+.textRed {
+    color: red;
+}
+
+.newsContent {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+}
+
+.newsTitle {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: #d45500;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#top {
+    position: relative;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #d45500;
+}
+
+#top a:link, #top a:visited {
+  color: blue;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+#top_menu {
+    margin-top: 10px;
+    margin-right: 50px;
+    margin-left: 50px;
+    position: relative;
+    margin-bottom: 0px;
+}

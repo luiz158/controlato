@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glassfish-web-app error-url="">
+  <context-root>/app</context-root>
+  <security-role-mapping>
+    <role-name>administrator</role-name>
+    <group-name>administrators</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>user</role-name>
+    <group-name>users</group-name>
+    <group-name>administrators</group-name>
+  </security-role-mapping>
+  <parameter-encoding default-charset="UTF-8"/>
+</glassfish-web-app>

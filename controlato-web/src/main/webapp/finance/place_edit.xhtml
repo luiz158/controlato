@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- /* Controlato is a web-based service conceived and designed to assist families
+ * on the control of their daily lives.
+ * Copyright (C) 2012 Controlato.org
+ *
+ * Controlato is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Controlato is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Controlato. Look for the file LICENSE.txt at the root level.
+ * If you do not, see http://www.gnu.org/licenses/.
+ * */-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <body>
+        <ui:composition template="../layout.xhtml">
+            <ui:define name="title">#{bundle.place}</ui:define>
+            <ui:define name="content">
+                <div class="content">
+                    <h1>#{bundle.place}</h1>
+                    <h:form>
+                        <h:messages styleClass="alertMessage"/>
+                        <h:panelGrid>
+                            <h:outputLabel for="name" value="#{bundle.name} *" styleClass="fieldLabel"/>
+                            <h:inputText id="name" label="#{bundle.name}" required="true" size="40" maxlength="100" value="#{placeMBean.place.name}"/>
+
+                            <h:outputLabel for="location" value="#{bundle.location}" styleClass="fieldLabel"/>
+                            <h:inputText id="location" label="#{bundle.location}" size="40" maxlength="100" value="#{placeMBean.place.location}"/>
+
+                            <h:outputLabel for="city" value="#{bundle.city}" styleClass="fieldLabel"/>
+                            <h:inputText id="city" label="#{bundle.city}" size="40" maxlength="100" value="#{placeMBean.place.city}"/>
+
+                            <h:outputLabel for="postalCode" value="#{bundle.postalCode}" styleClass="fieldLabel"/>
+                            <h:inputText id="postalCode" label="#{bundle.postalCode}" size="10" maxlength="10" value="#{placeMBean.place.postalCode}"/>
+
+                            <h:outputLabel for="phoneNumber" value="#{bundle.phoneNumber}" styleClass="fieldLabel"/>
+                            <h:inputText id="phoneNumber" label="#{bundle.phoneNumber}" size="20" maxlength="20" value="#{placeMBean.place.phoneNumber}"/>
+
+                            <h:outputLabel for="website" value="#{bundle.website}" styleClass="fieldLabel"/>
+                            <h:panelGrid columns="2">
+                                <h:outputText value="http://"/>
+                                <h:inputText id="website" label="#{bundle.website}" size="40" maxlength="255" value="#{placeMBean.place.website}"/>
+                            </h:panelGrid>
+
+                            <h:outputLabel for="email" value="#{bundle.email}" styleClass="fieldLabel"/>
+                            <h:inputText id="email" label="#{bundle.email}" size="40" maxlength="255" value="#{placeMBean.place.email}"/>
+                        </h:panelGrid>
+                        <h:inputHidden id="id" value="#{placeMBean.place.id}"/>
+                        <h:panelGrid columns="3">
+                            <h:commandButton value="#{bundle.save}" action="#{placeMBean.save}"/>
+                            <h:button outcome="place" value="#{bundle.cancel}">
+                                <f:param name="id" value="#{placeMBean.place.id}"/>
+                            </h:button>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
