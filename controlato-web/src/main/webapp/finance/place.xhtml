@@ -45,6 +45,7 @@
 
                                     <h:outputText value="#{bundle.website}:" styleClass="fieldLabel"/>
                                     <h:outputLink value="http://#{placeMBean.place.website}" target="_blank" rendered="#{! empty placeMBean.place.website}"><h:outputText value="http://#{placeMBean.place.website}"/></h:outputLink>
+                                    <h:outputText value=" " rendered="#{empty placeMBean.place.website}"/>
 
                                     <h:outputText value="#{bundle.email}:" styleClass="fieldLabel"/>
                                     <h:outputLink value="mailto:#{placeMBean.place.email}" rendered="#{! empty placeMBean.place.email}"><h:outputText value="#{placeMBean.place.email}"/></h:outputLink>
