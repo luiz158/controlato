@@ -207,8 +207,8 @@ public class RevenueBean implements OperationFilterable {
 
     public void save(Revenue revenue) {
         /* When the revenue is new, a new transaction is created and associated to it. */
-        if(revenue.getId() == null || revenue.getId().isEmpty()) {
-            revenue.setId(EntitySupport.generateEntityId());
+        if(EntitySupport.INSTANCE.isIdNotValid(revenue)) {
+            revenue.setId(EntitySupport.INSTANCE.generateEntityId());
 
             Transaction transaction = revenue.createTransaction();
             transactionBean.save(transaction);

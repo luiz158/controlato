@@ -66,7 +66,7 @@ public class AccessGroupBean {
         }
         catch(NoResultException nre) {
             defaultUserGroup = new AccessGroup(DEFAULT_GROUP,"Default Members Group");
-            defaultUserGroup.setId(EntitySupport.generateEntityId());
+            defaultUserGroup.setId(EntitySupport.INSTANCE.generateEntityId());
             defaultUserGroup.setUserDefault(Boolean.TRUE);
             em.persist(defaultUserGroup);
         }
@@ -84,7 +84,7 @@ public class AccessGroupBean {
         }
         catch(Exception nre) {
             group = new AccessGroup(ADMIN_GROUP,"JUG Leaders Group");
-            group.setId(EntitySupport.generateEntityId());
+            group.setId(EntitySupport.INSTANCE.generateEntityId());
             em.persist(group);
         }
         return group;
@@ -115,7 +115,7 @@ public class AccessGroupBean {
                 }
             }
             catch(NoResultException nre) {
-                accessGroup.setId(EntitySupport.generateEntityId());
+                accessGroup.setId(EntitySupport.INSTANCE.generateEntityId());
                 em.persist(accessGroup);
             }
         }

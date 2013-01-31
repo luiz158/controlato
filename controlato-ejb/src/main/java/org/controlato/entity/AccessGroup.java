@@ -30,7 +30,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="access_group")
-public class AccessGroup implements Serializable {
+public class AccessGroup implements Serializable, Identified {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -50,10 +50,12 @@ public class AccessGroup implements Serializable {
         this.description = description;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public void setId(String id) {
         this.id = id;
     }

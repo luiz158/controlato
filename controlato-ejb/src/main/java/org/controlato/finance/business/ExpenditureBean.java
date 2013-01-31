@@ -267,8 +267,8 @@ public class ExpenditureBean implements OperationFilterable {
 
     public void save(Expenditure expenditure) {
         /* When the expenditure is new, a new transaction is created and associated to it. */
-        if(expenditure.getId() == null || expenditure.getId().isEmpty()) {
-            expenditure.setId(EntitySupport.generateEntityId());
+        if(EntitySupport.INSTANCE.isIdNotValid(expenditure)) {
+            expenditure.setId(EntitySupport.INSTANCE.generateEntityId());
 
             Transaction transaction = expenditure.createTransaction();
             transactionBean.save(transaction);

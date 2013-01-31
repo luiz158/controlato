@@ -23,6 +23,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.controlato.entity.Identified;
 
 /**
  *
@@ -30,7 +31,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "place")
-public class Place implements Serializable {
+public class Place implements Serializable, Identified {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -65,10 +66,12 @@ public class Place implements Serializable {
         this.name = name;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public void setId(String id) {
         this.id = id;
     }

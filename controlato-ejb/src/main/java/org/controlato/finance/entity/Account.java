@@ -21,6 +21,7 @@ package org.controlato.finance.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.*;
+import org.controlato.entity.Identified;
 
 /**
  *
@@ -28,7 +29,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="account")
-public class Account implements Serializable {
+public class Account implements Serializable, Identified {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -55,10 +56,12 @@ public class Account implements Serializable {
         this.id = id;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public void setId(String id) {
         this.id = id;
     }

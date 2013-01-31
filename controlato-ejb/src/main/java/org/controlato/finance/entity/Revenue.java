@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
+import org.controlato.entity.Identified;
 
 /**
  *
@@ -29,7 +30,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="revenue")
-public class Revenue implements Operation, Serializable {
+public class Revenue implements Operation, Serializable, Identified {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -67,10 +68,12 @@ public class Revenue implements Operation, Serializable {
         this.id = id;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public void setId(String id) {
         this.id = id;
     }

@@ -199,7 +199,7 @@ public class UserAccountBean {
 
         userAccount.setConfirmationCode(generateConfirmationCode());
         userAccount.setRegistrationDate(Calendar.getInstance(TimeZone.getDefault()).getTime());
-        userAccount.setId(EntitySupport.generateEntityId());
+        userAccount.setId(EntitySupport.INSTANCE.generateEntityId());
         em.persist(userAccount);
 
         if(noAccount) {
@@ -352,8 +352,9 @@ public class UserAccountBean {
                                             .setParameter("userAccount", userAccount)
                                             .setParameter("password", (new Authentication()).hashPassword(passwordToCheck))
                                             .getSingleResult();
-            if(authentication != null)
+            if(authentication != null) {
                 return Boolean.TRUE;
+            }
         }
         catch(NoResultException nre) {
             return Boolean.FALSE;

@@ -254,8 +254,8 @@ public class MessengerBean {
     }
 
     public HistoryMessage saveHistoryMessage(HistoryMessage message) {
-    	if(message.getId() == null || message.getId().isEmpty()) {
-            message.setId(EntitySupport.generateEntityId());
+    	if(EntitySupport.INSTANCE.isIdNotValid(message)) {
+            message.setId(EntitySupport.INSTANCE.generateEntityId());
             em.persist(message);
             return message;
         }

@@ -146,8 +146,8 @@ public class CategoryOperationBean {
     }
 
     public void save(CategoryOperation categoryOperation) {
-        if(categoryOperation.getId() == null || categoryOperation.getId().isEmpty()) {
-            categoryOperation.setId(EntitySupport.generateEntityId());
+        if(EntitySupport.INSTANCE.isIdNotValid(categoryOperation)) {
+            categoryOperation.setId(EntitySupport.INSTANCE.generateEntityId());
             em.persist(categoryOperation);
         }
         else {

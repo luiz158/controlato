@@ -30,6 +30,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.controlato.entity.Identified;
 
 /**
  *
@@ -37,7 +38,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="transfer")
-public class Transfer implements Serializable {
+public class Transfer implements Serializable, Identified {
 
     private static final long serialVersionUID = 1L;
 
@@ -76,10 +77,12 @@ public class Transfer implements Serializable {
         this.id = id;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public void setId(String id) {
         this.id = id;
     }

@@ -19,15 +19,37 @@
 package org.controlato.util;
 
 import java.util.UUID;
+import org.controlato.entity.Identified;
 
 /**
  *
  * @author Hildeberto Mendonca  - http://www.hildeberto.com
  */
-public class EntitySupport {
+public enum EntitySupport {
 
-    public static String generateEntityId() {
+    INSTANCE;
+
+    /**
+     * @return Returns a 32 characteres string to be used as id of entities that
+     * implements the interface org.controlato.entity.Identified.
+     */
+    public String generateEntityId() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString().replaceAll("-", "").toUpperCase();
+    }
+
+    /**
+     * Verifies whether the id of an identified entity is not valid to persist
+     * in the database.
+     * @param identified entity class that implements the interface
+     * org.controlato.entity.Identified.
+     * @return true if the id is not valid.
+     */
+    public boolean isIdNotValid(Identified identified) {
+        // TODO: lançar uma excessão se o parâmetro for nulo.
+        if(identified == null || identified.getId() == null || identified.getId().isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }

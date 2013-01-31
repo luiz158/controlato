@@ -191,8 +191,8 @@ public class TransactionBean implements OperationFilterable {
     }
 
     public void save(Transaction transaction) {
-        if(transaction.getId() == null || transaction.getId().isEmpty()) {
-            transaction.setId(EntitySupport.generateEntityId());
+        if(EntitySupport.INSTANCE.isIdNotValid(transaction)) {
+            transaction.setId(EntitySupport.INSTANCE.generateEntityId());
             em.persist(transaction);
 
             accountBean.updateBalance(transaction.getAccount());

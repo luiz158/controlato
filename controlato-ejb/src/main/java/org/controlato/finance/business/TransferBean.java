@@ -187,8 +187,8 @@ public class TransferBean implements OperationFilterable {
     }
 
     public void save(Transfer transfer) {
-       if(transfer.getId() == null || transfer.getId().isEmpty()) {
-            transfer.setId(EntitySupport.generateEntityId());
+       if(EntitySupport.INSTANCE.isIdNotValid(transfer)) {
+            transfer.setId(EntitySupport.INSTANCE.generateEntityId());
 
             Transaction sourceTransaction = transfer.createSourceTransaction();
             transactionBean.save(sourceTransaction);

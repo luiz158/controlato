@@ -68,8 +68,8 @@ public class AccountBean {
     }
 
     public void save(Account account) {
-        if(account.getId() == null || account.getId().isEmpty()) {
-            account.setId(EntitySupport.generateEntityId());
+        if(EntitySupport.INSTANCE.isIdNotValid(account)) {
+            account.setId(EntitySupport.INSTANCE.generateEntityId());
             em.persist(account);
         }
         else {

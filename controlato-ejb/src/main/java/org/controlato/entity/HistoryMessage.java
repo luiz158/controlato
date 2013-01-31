@@ -30,7 +30,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "history_message")
-public class HistoryMessage implements Serializable {
+public class HistoryMessage implements Serializable, Identified {
 
     private static final long serialVersionUID = 1L;
 
@@ -80,10 +80,12 @@ public class HistoryMessage implements Serializable {
         return historicMessages;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public void setId(String id) {
         this.id = id;
     }

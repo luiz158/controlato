@@ -47,8 +47,8 @@ public class PlaceBean {
     }
 
     public void save(Place place) {
-        if(place.getId() == null || place.getId().isEmpty()) {
-            place.setId(EntitySupport.generateEntityId());
+        if(EntitySupport.INSTANCE.isIdNotValid(place)) {
+            place.setId(EntitySupport.INSTANCE.generateEntityId());
             em.persist(place);
         }
         else {
