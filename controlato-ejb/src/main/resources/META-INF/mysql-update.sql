@@ -64,18 +64,18 @@ insert into message_template (id, language, title, body) values
     ('IKWMAJSNDOE3F122DCC87D4224887287', 'pt', '[Controlato] User Deactivated', '<p>Hello,</p><p>we''ve just heard that you want to leave us :( Thank you for using Controlato. We hope to see you again soon!</p><p>All the best,</p><p><b>Controlato Team</b></p>'),
     ('0D6F96382IKEJSUIWOK5A720F3326F1B', 'pt', '[Controlato] A Member Was Deactivated', '<p>Dear Controlato Manager, </p><p> the user <b>#{userAccount.email}</b> was deactivated from Controlato due to the following reason:</p><p><i>#{userAccount.deactivationReason}</i></p><p>Regards,</p><p><b>Controlato Management</b></p>');
 
-create table history_message (
+create table message_history (
     id           char(32)     not null,
     subject      varchar(255) not null,
     body         text         not null,
     recipient    char(32)     not null,
     message_sent tinyint(1)       null,
     date_sent    datetime         null
-) engine = innodb;
+) engine innodb;
 
-alter table history_message add constraint pk_history_message primary key (id);
-create index idx_history_message_recipient on history_message (recipient);
-alter table history_message add constraint fk_history_message_recipient foreign key (recipient) references user_account(id) on delete cascade;
+alter table message_history add constraint pk_message_history primary key (id);
+create index idx_message_history_recipient on message_history (recipient);
+alter table message_history add constraint fk_message_history_recipient foreign key (recipient) references user_account(id) on delete cascade;
 
 alter table place add user_account char(32) null;
 create index idx_place_user_account on place (user_account);

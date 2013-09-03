@@ -21,7 +21,6 @@ package org.controlato.finance.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -195,8 +194,8 @@ public class Transfer implements Serializable, Identified {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 67 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
@@ -209,7 +208,7 @@ public class Transfer implements Serializable, Identified {
             return false;
         }
         final Transfer other = (Transfer) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
             return false;
         }
         return true;

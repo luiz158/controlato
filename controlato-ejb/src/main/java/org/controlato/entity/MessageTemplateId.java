@@ -19,7 +19,6 @@
 package org.controlato.entity;
 
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Embeddable;
 
 /**
@@ -70,9 +69,7 @@ public class MessageTemplateId implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        hash = 37 * hash + Objects.hashCode(this.language);
+        int hash = 5;
         return hash;
     }
 
@@ -85,10 +82,7 @@ public class MessageTemplateId implements Serializable {
             return false;
         }
         final MessageTemplateId other = (MessageTemplateId) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.language, other.language)) {
+        if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
             return false;
         }
         return true;

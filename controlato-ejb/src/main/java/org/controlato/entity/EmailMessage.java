@@ -18,6 +18,7 @@
  * */
 package org.controlato.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.mail.Address;
 import javax.mail.Message.RecipientType;
@@ -31,19 +32,19 @@ import javax.mail.internet.MimeMessage;
  * UserAccount as a usual recipient.
  * @author Hildeberto Mendonca  - http://www.hildeberto.com
  */
-public class EmailMessage extends Message {
+public class EmailMessage {
 
-    private UserAccount[] recipients;
+    private List<UserAccount> recipients;
     private String subject;
     private String body;
 
-    public UserAccount[] getRecipients() {
+    public List<UserAccount> getRecipients() {
         return recipients;
     }
 
     public UserAccount getRecipient() {
         if(recipients != null) {
-            return recipients[0];
+            return recipients.get(0);
         }
 
         return null;
@@ -54,18 +55,14 @@ public class EmailMessage extends Message {
             return;
         }
 
-        this.recipients = new UserAccount[recipients.size()];
-        int i = 0;
-        for(UserAccount recipient: recipients) {
-            this.recipients[i++] = recipient;
-        }
+        this.recipients = recipients;
     }
 
     public void setRecipient(UserAccount recipientTo) {
         if(recipients == null) {
-            recipients = new UserAccount[1];
+            recipients = new ArrayList<>();
         }
-        recipients[0] = recipientTo;
+        recipients.add(recipientTo);
     }
 
     public String getSubject() {
@@ -76,25 +73,12 @@ public class EmailMessage extends Message {
         this.subject = subject;
     }
 
-    @Override
     public String getBody() {
         return body;
     }
 
-    @Override
     public void setBody(String body) {
         this.body = body;
-    }
-
-    public MimeMessage createMimeMessage(Session mailSession, UserAccount sender) {
-        MimeMessage mimeMessage = createMimeMessage(mailSession);
-        try {
-            Address sndr = new InternetAddress(sender.getPostingEmail());
-            mimeMessage.setSender(sndr);
-        } catch (MessagingException me) {
-            throw new RuntimeException("Error when sending the mail confirmation. The registration was not finalized.",me);
-        }
-        return mimeMessage;
     }
 
     public MimeMessage createMimeMessage(Session mailSession) {
@@ -104,9 +88,9 @@ public class EmailMessage extends Message {
             Address[] jRecipients; // JavaMail recipients.
 
             if(recipients != null) {
-                jRecipients = new Address[recipients.length];
-                for(int i = 0;i < recipients.length;i++) {
-                    jRecipients[i] = new InternetAddress(recipients[i].getPostingEmail());
+                jRecipients = new Address[recipients.size()];
+                for(int i = 0;i < recipients.size();i++) {
+                    jRecipients[i] = new InternetAddress(recipients.get(i).getPostingEmail());
                 }
                 msg.setRecipients(RecipientType.TO, jRecipients);
             }
@@ -116,7 +100,7 @@ public class EmailMessage extends Message {
 
             return msg;
         } catch (MessagingException me) {
-            throw new RuntimeException("Error when sending the mail confirmation. The registration was not finalized.",me);
+            throw new RuntimeException("Error when sending the mail confirmation.", me);
         }
     }
 }
